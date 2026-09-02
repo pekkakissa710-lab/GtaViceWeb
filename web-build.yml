@@ -1,0 +1,54 @@
+name: Build Web Version
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    
+    - name: Setup Emscripten
+      uses: mymindstorm/setup-emsdk@v11
+      with:
+        version: latest
+        actions-cache-folder: 'emsdk-cache'
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake python3 build-essential
+    
+    - name: Create build directory
+      run: mkdir -p build-web
+    
+    - name: Configure build
+      run: |
+        cd build-web
+        emcmake cmake .. -DCMAKE_BUILD_TYPE=Release -DRE3_WEB=ON
+    
+    - name: Build
+      run: |
+        cd build-web
+        cmake --build . -j$(nproc)
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: web-build
+        path: build-web/web/
+        retention-days: 30
+    
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build-web/web
