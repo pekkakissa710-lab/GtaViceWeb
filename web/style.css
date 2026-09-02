@@ -1,0 +1,234 @@
+/* Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #000 0%, #1a0033 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+}
+
+.loading-content {
+    text-align: center;
+    color: #fff;
+}
+
+.loading-content h1 {
+    font-size: 48px;
+    margin: 0 0 20px 0;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255,0,127,0.5);
+}
+
+.loading-content p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #aaa;
+}
+
+.progress-bar {
+    width: 300px;
+    height: 20px;
+    background: #333;
+    border: 2px solid #ff007f;
+    margin: 30px auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff007f 0%, #00ffff 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+#status-text {
+    font-size: 14px;
+    color: #999;
+    margin-top: 20px;
+}
+
+/* Error Screen */
+.error-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.error-content {
+    text-align: center;
+    color: #fff;
+    background: #1a0000;
+    padding: 40px;
+    border-radius: 10px;
+    border: 2px solid #ff0000;
+    max-width: 500px;
+}
+
+.error-content h1 {
+    color: #ff0000;
+    margin: 0 0 20px 0;
+}
+
+.error-content p {
+    margin: 10px 0;
+    color: #aaa;
+}
+
+.error-content button {
+    margin-top: 20px;
+    padding: 10px 30px;
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.error-content button:hover {
+    background: #cc0000;
+}
+
+/* Mobile Controls */
+.mobile-controls {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    background: rgba(0,0,0,0.7);
+    z-index: 100;
+    touch-action: none;
+}
+
+.mobile-controls.visible {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Left Analog Stick */
+.left-stick {
+    flex: 0 0 120px;
+    height: 120px;
+    margin: 10px;
+}
+
+.stick-bg {
+    width: 120px;
+    height: 120px;
+    background: rgba(100,100,100,0.5);
+    border-radius: 50%;
+    position: relative;
+    border: 2px solid rgba(200,200,200,0.7);
+}
+
+.stick-circle {
+    width: 60px;
+    height: 60px;
+    background: rgba(200,200,200,0.8);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.05s linear;
+}
+
+/* Right Area for Camera */
+.right-area {
+    flex: 1;
+    height: 100%;
+    margin: 10px;
+    background: rgba(100,100,100,0.3);
+    border-radius: 10px;
+    border: 2px dashed rgba(200,200,200,0.5);
+    touch-action: none;
+}
+
+/* Button Group */
+.button-group {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px;
+}
+
+.action-btn, .menu-btn {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    touch-action: manipulation;
+    font-size: 14px;
+    transition: all 0.1s;
+}
+
+.action-btn {
+    background: rgba(255,0,127,0.8);
+    color: #fff;
+    min-width: 80px;
+}
+
+.action-btn:active {
+    background: rgba(255,0,127,1);
+    transform: scale(0.95);
+}
+
+.menu-btn {
+    background: rgba(0,200,255,0.8);
+    color: #fff;
+    min-width: 80px;
+}
+
+.menu-btn:active {
+    background: rgba(0,200,255,1);
+    transform: scale(0.95);
+}
+
+/* Game Container */
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mobile-controls.visible {
+        height: 220px;
+    }
+    
+    .action-btn, .menu-btn {
+        padding: 12px 20px;
+        font-size: 12px;
+        min-width: 70px;
+    }
+}
